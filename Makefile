@@ -5,10 +5,10 @@ CFLAGS=-c -Wall -MMD
 LDFLAGS=
 
 MAIN=main.cpp
-SOURCES=perceptron.h perceptron.cpp $(MAIN)
+SOURCES=csv_parser.hpp csv_parser.cpp data_struct.h enum.h perceptron.h perceptron.cpp $(MAIN)
 OBJECTS=$(SOURCES:.cpp=.o)
 	DEPS=$(OBJECTS:.o=.d)
-	EXECUTABLE=perceptron
+	EXECUTABLE=perceptron.out
 
 all: $(SOURCES) $(EXECUTABLE)
 
