@@ -2,6 +2,7 @@
 #include "csv_parser.hpp"
 #include "enum.h"
 #include "data_struct.h"
+#include <vector>
 #include <stdlib.h>
 #include <string.h>
 
@@ -18,8 +19,10 @@ owner charToOwner (const char * character) {
 }
 
 int main() {
-    TTTDatum * TTTData = new TTTDatum[958];
-    CancerDatum * CancerData = new CancerDatum[300];
+    //TTTDatum ** TTTData = new TTTDatum*[958];
+    //CancerDatum ** CancerData = new CancerDatum*[300];
+    vector<TTTDatum> TTTData;
+    vector<CancerDatum> CancerData;
     int TTTDataCount = 0;
     int CancerDataCount = 0;
 
@@ -36,21 +39,22 @@ int main() {
 
     while(ttt_file_parser.has_more_rows()) {
         TTTDataCount++;
-        TTTDatum datum;
-        datum.features = new owner[9];
+        TTTDatum ttt_datum;
+        //ttt_datum->features = new owner[9];
 
         csv_row row = ttt_file_parser.get_row();
         for (unsigned int i = 0; i < row.size() - 1; i++) {
-            datum.features[i] = charToOwner(row[i].c_str()); 
+            ttt_datum.features[i] = charToOwner(row[i].c_str()); 
             printf("COLUMN %02d : %s\n", i + 1U, row[i].c_str());
         }
-        datum.xWins = strcmp(row[9].c_str(), "positive") == 0 ? true : false;
+        ttt_datum.xWins = strcmp(row[9].c_str(), "positive") == 0 ? true : false;
 
         printf("====================================================================\n");
         printf("END OF ROW %02d\n", TTTDataCount);
         printf("====================================================================\n");
 
-        TTTData[TTTDataCount] = datum;
+        //TTTData[TTTDataCount] = ttt_datum;
+        TTTData.push_back(ttt_datum);
     }
 
     csv_parser cancer_file_parser;
@@ -61,20 +65,21 @@ int main() {
     while(cancer_file_parser.has_more_rows()) {
         CancerDataCount++;
         csv_row row = cancer_file_parser.get_row();
-        CancerDatum datum;
-        datum.features = new float[row.size() - 2];
+        CancerDatum cancer_datum;
+        //cancer_datum->features = new float[row.size() - 2];
 
         for (unsigned int i = 2; i < row.size(); i++) {
-            datum.features[i] = atof(row[i].c_str());
+            cancer_datum.features[i] = atof(row[i].c_str());
             printf("COLUMN %02d : %s\n", i + 1U, row[i].c_str());
         }
-        datum.malignant = strcmp(row[1].c_str(), "M") == 0 ? true : false;
+        cancer_datum.malignant = strcmp(row[1].c_str(), "M") == 0 ? true : false;
 
         printf("====================================================================\n");
         printf("END OF ROW %02d\n", CancerDataCount);
         printf("====================================================================\n");
 
-        CancerData[CancerDataCount] = datum;
+        //CancerData[CancerDataCount] = cancer_datum;
+        CancerData.push_back(cancer_datum);
     }
 
     return 0;

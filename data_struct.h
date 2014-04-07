@@ -2,14 +2,14 @@
 #define DATA_STRUCT_H
 
 struct TTTDatum {
-    owner * features;
     bool xWins;
+    owner features[9];
 };
 
 struct CancerDatum {
     char * patientID;
-    float * features;
     bool malignant;
+    float features[30];
 };
 
 #endif
