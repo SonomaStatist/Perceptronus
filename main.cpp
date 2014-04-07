@@ -3,7 +3,6 @@
 #include "enum.h"
 #include "data_struct.h"
 #include <vector>
-#include <stdlib.h>
 #include <string.h>
 
 using namespace std;
@@ -19,8 +18,6 @@ owner charToOwner (const char * character) {
 }
 
 int main() {
-    //TTTDatum ** TTTData = new TTTDatum*[958];
-    //CancerDatum ** CancerData = new CancerDatum*[300];
     vector<TTTDatum> TTTData;
     vector<CancerDatum> CancerData;
     int TTTDataCount = 0;
@@ -40,7 +37,6 @@ int main() {
     while(ttt_file_parser.has_more_rows()) {
         TTTDataCount++;
         TTTDatum ttt_datum;
-        //ttt_datum->features = new owner[9];
 
         csv_row row = ttt_file_parser.get_row();
         for (unsigned int i = 0; i < row.size() - 1; i++) {
@@ -53,7 +49,6 @@ int main() {
         printf("END OF ROW %02d\n", TTTDataCount);
         printf("====================================================================\n");
 
-        //TTTData[TTTDataCount] = ttt_datum;
         TTTData.push_back(ttt_datum);
     }
 
@@ -66,7 +61,6 @@ int main() {
         CancerDataCount++;
         csv_row row = cancer_file_parser.get_row();
         CancerDatum cancer_datum;
-        //cancer_datum->features = new float[row.size() - 2];
 
         for (unsigned int i = 2; i < row.size(); i++) {
             cancer_datum.features[i] = atof(row[i].c_str());
@@ -78,7 +72,6 @@ int main() {
         printf("END OF ROW %02d\n", CancerDataCount);
         printf("====================================================================\n");
 
-        //CancerData[CancerDataCount] = cancer_datum;
         CancerData.push_back(cancer_datum);
     }
 
