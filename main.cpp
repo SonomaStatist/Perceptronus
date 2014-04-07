@@ -3,13 +3,14 @@
 #include "enum.h"
 #include "data_struct.h"
 #include <stdlib.h>
+#include <string.h>
 
 using namespace std;
 
 owner charToOwner (const char * character) {
-    if (character == "x") {
+    if (strcmp(character, "x") == 0) {
         return X;
-    } else if (character == "0") {
+    } else if (strcmp(character, "0") == 0) {
         return O;
     } else {
         return B;
@@ -39,11 +40,11 @@ int main() {
         datum.features = new owner[9];
 
         csv_row row = ttt_file_parser.get_row();
-        for (int i = 0; i < row.size() - 1; i++) {
+        for (unsigned int i = 0; i < row.size() - 1; i++) {
             datum.features[i] = charToOwner(row[i].c_str()); 
             printf("COLUMN %02d : %s\n", i + 1U, row[i].c_str());
         }
-        datum.xWins = row[9].c_str() == "positive" ? true : false;
+        datum.xWins = strcmp(row[9].c_str(), "positive") == 0 ? true : false;
 
         printf("====================================================================\n");
         printf("END OF ROW %02d\n", TTTDataCount);
@@ -63,11 +64,11 @@ int main() {
         CancerDatum datum;
         datum.features = new float[row.size() - 2];
 
-        for (int i = 2; i < row.size(); i++) {
+        for (unsigned int i = 2; i < row.size(); i++) {
             datum.features[i] = atof(row[i].c_str());
             printf("COLUMN %02d : %s\n", i + 1U, row[i].c_str());
         }
-        datum.malignant = row[1].c_str() == "M" ? true : false;
+        datum.malignant = strcmp(row[1].c_str(), "M") == 0 ? true : false;
 
         printf("====================================================================\n");
         printf("END OF ROW %02d\n", CancerDataCount);
