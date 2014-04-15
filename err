@@ -1,6 +1,0 @@
-g++ -c -std=c++11 -DDEBUG -g -Wall -MMD -MF ttrainer.d ttrainer.cpp -o ttrainer.o
-g++ -c -std=c++11 -DDEBUG -g -Wall -MMD -MF main.d main.cpp -o main.o
-main.cpp: In function ‘int main()’:
-main.cpp:27:9: warning: unused variable ‘CancerDataCount’ [-Wunused-variable]
-main.cpp:31:18: warning: unused variable ‘CancerFilename’ [-Wunused-variable]
-g++  csv_parser.o perceptron.o ttrainer.o main.o -o perceptron.out
