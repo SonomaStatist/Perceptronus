@@ -1,11 +1,14 @@
 #include <iostream>
-#include "csv_parser.hpp"
-#include "enum.h"
-#include "data_struct.h"
 #include <vector>
 #include <string.h>
 
+#include "csv_parser.hpp"
+#include "enum.h"
+#include "data_struct.h"
+#include "ttrainer.h"
+
 using namespace std;
+
 
 owner charToOwner (const char * character) {
     if (strcmp(character, "x") == 0) {
@@ -41,17 +44,25 @@ int main() {
         csv_row row = ttt_file_parser.get_row();
         for (unsigned int i = 0; i < row.size() - 1; i++) {
             ttt_datum.features[i] = charToOwner(row[i].c_str()); 
-            printf("COLUMN %02d : %s\n", i + 1U, row[i].c_str());
+            //printf("COLUMN %02d : %s\n", i + 1U, row[i].c_str());
         }
         ttt_datum.xWins = strcmp(row[9].c_str(), "positive") == 0 ? true : false;
 
-        printf("====================================================================\n");
-        printf("END OF ROW %02d\n", TTTDataCount);
-        printf("====================================================================\n");
+        //printf("====================================================================\n");
+        //printf("END OF ROW %02d\n", TTTDataCount);
+        //printf("====================================================================\n");
 
         TTTData.push_back(ttt_datum);
     }
 
+    TTrainer ttrainer(TTTData);
+
+    printf("initial pass rate: %d%%", (int) (100 * ttrainer.test()));
+    for (int epoch = 1; epoch < 5; epoch++) {
+        ttrainer.train();
+        printf("epoch %d pass rate: %d%%", epoch, (int) (100 * ttrainer.test()));
+    }
+    /*
     csv_parser cancer_file_parser;
     cancer_file_parser.init(CancerFilename);
     cancer_file_parser.set_field_term_char(field_terminator);
@@ -64,16 +75,17 @@ int main() {
 
         for (unsigned int i = 2; i < row.size(); i++) {
             cancer_datum.features[i] = atof(row[i].c_str());
-            printf("COLUMN %02d : %s\n", i + 1U, row[i].c_str());
+            //printf("COLUMN %02d : %s\n", i + 1U, row[i].c_str());
         }
         cancer_datum.malignant = strcmp(row[1].c_str(), "M") == 0 ? true : false;
 
-        printf("====================================================================\n");
-        printf("END OF ROW %02d\n", CancerDataCount);
-        printf("====================================================================\n");
+        //printf("====================================================================\n");
+        //printf("END OF ROW %02d\n", CancerDataCount);
+        //printf("====================================================================\n");
 
         CancerData.push_back(cancer_datum);
     }
+    */
 
     return 0;
 }

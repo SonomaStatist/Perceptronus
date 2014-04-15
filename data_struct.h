@@ -3,11 +3,10 @@
 
 struct TTTDatum {
     bool xWins;
-    owner features[9];
+    int features[9];
 };
 
 struct CancerDatum {
-    char * patientID;
     bool malignant;
     float features[30];
 };
