@@ -59,8 +59,7 @@ int main() {
 
     printf("initial pass rate: %d%%", (int) (100 * ttrainer.test()));
     for (int epoch = 1; epoch < 5; epoch++) {
-        ttrainer.train();
-        printf("epoch %d pass rate: %d%%", epoch, (int) (100 * ttrainer.test()));
+        printf("epoch %d pass rate: %d%%", epoch, (int) (100 * ttrainer.train()));
     }
     /*
     csv_parser cancer_file_parser;

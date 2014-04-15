@@ -15,7 +15,7 @@ Perceptron * makePerceptron(int len) {
     return p;
 }
 
-float y(Perceptron * p, int * i) {
+float y(Perceptron * p, const int * i) {
     float dot = 0.0;
 
     int j;
@@ -28,11 +28,11 @@ float y(Perceptron * p, int * i) {
     return dot > 0.0;
 }
 
-bool f(Perceptron * p, int * i) {
+bool f(Perceptron * p, const int * i) {
     return y(p, i) > 0.0;
 }
 
-void update(Perceptron * p, int * i, bool out) {
+void update(Perceptron * p, const int * i, bool out) {
     int d = out ? 1 : 0;
     float yi = y(p, i);
 

@@ -7,11 +7,11 @@
 #include "data_struct.h"
 
 TTrainer::TTrainer(std::vector<TTTDatum> data) {
-    trainingSet.assign(data.begin(), data.end());
+    trainingSet = data;
 
     int size = data.size();
     int numTest = (int) (size * 0.1);
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    unsigned seed = 10987; //std::chrono::system_clock::now().time_since_epoch().count();
     std::mt19937 rand(seed);
 
     for (int i = 0; i < numTest; i++) {
