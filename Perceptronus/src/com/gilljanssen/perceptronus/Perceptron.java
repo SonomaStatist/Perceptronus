@@ -6,10 +6,10 @@ public class Perceptron {
     final float rate;
     // the length of the weight vector
     final int len;
-    // the bias factor
-    float bias;
     // the weight vector
     final float[] weights;
+    // the bias factor
+    float bias;
 
     public Perceptron(int len) {
         this.rate = 0.01f;

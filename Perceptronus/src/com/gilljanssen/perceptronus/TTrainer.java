@@ -8,10 +8,10 @@ import java.util.List;
  * @author Amandeep Gill
  */
 public class TTrainer {
+    public final int numTests;
     private final Perceptron p = new Perceptron(9);
     private final List<Data.TDatum> trainingData;
     private final List<Data.TDatum> testData;
-    public final int numTests;
 
     public TTrainer(List<Data.TDatum> trainingData, List<Data.TDatum> testData) {
         this.trainingData = trainingData;
